@@ -189,7 +189,7 @@ public class Main {
                 resultInt = value1 + value2;
                 break;
             case '-':
-                if (numSet.equals("roman") && value1 < value2) {
+                if (numSet.equals("roman") && value1 <= value2) {
                     throw new IllegalArgumentException("Римские числа не могут быть меньше I");
                 }
                 resultInt = value1 - value2;
