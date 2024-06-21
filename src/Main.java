@@ -176,8 +176,8 @@ public class Main {
         String result = "";
 
         // Проверка на корректность входных данных
-        if (numSet.equals("arab") && (Math.abs(value1) > 10 || Math.abs(value2) > 10)) {
-            throw new IllegalArgumentException("Числа в задании должны быть от -10 до 10");
+        if (numSet.equals("arab") && (value1 < 1 || value1 > 10 || value2 < 1 || value2 > 10)) {
+            throw new IllegalArgumentException("Числа в задании должны быть от 1 до 10");
         }
         if (numSet.equals("roman") && (value1 < 1 || value1 > 10 || value2 < 1 || value2 > 10)) {
             throw new IllegalArgumentException("Числа в задании должны быть от I до X");
@@ -236,7 +236,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Введите задание в виде: 'Число1' 'арифметический оператор' 'Число2' и нажмите ENTER.");
-        System.out.println("Допустимо использование арабских чисел от -10 до 10 или римских чисел от I до X.");
+        System.out.println("Допустимо использование арабских чисел от 1 до 10 или римских чисел от I до X.");
         System.out.println();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
