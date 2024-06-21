@@ -6,10 +6,10 @@ class StringToExample {
     public String value2;
 
     /**
-     * Конструктор класса StringToExample
-     * @param value1 Первый операнд в виде строки
-     * @param action Арифметическая операция в виде символа
-     * @param value2 Второй операнд в виде строки
+    * Конструктор класса StringToExample
+    * @param value1 Первый операнд в виде строки
+    * @param action Арифметическая операция в виде символа
+    * @param value2 Второй операнд в виде строки
      */
     public StringToExample(String value1, char action, String value2) {
         this.value1 = value1;
@@ -17,6 +17,7 @@ class StringToExample {
         this.value2 = value2;
     }
 }
+
 
 class ReadyToCalculate {
     public int value1;
@@ -39,6 +40,16 @@ class ReadyToCalculate {
 public class Main {
     private static final String[] ROMAN = { "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
     private static final int[] ARAB = { 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+
+    public static String calc(String input) {
+        StringToExample example = stringTransform(input);
+        ReadyToCalculate dataForCalculate = stringToInt(example);
+        int value1 = dataForCalculate.value1;
+        int value2 = dataForCalculate.value2;
+        char action = example.action;
+        String numSet = dataForCalculate.numSet;
+        return calculateResult(value1, value2, action, numSet);
+    }
 
     /**
      * Преобразование строки в операнды и арифметический оператор
@@ -160,7 +171,7 @@ public class Main {
      * @throws IllegalArgumentException Если входные данные некорректны
      * @throws ArithmeticException Если произошло деление на ноль
      */
-    public static String calc(int value1, int value2, char action, String numSet) {
+    private static String calculateResult(int value1, int value2, char action, String numSet) {
         int resultInt;
         String result = "";
 
@@ -211,11 +222,6 @@ public class Main {
         return result;
     }
 
-    /**
-     * Вспомогательный метод для преобразования целого числа в римское
-     * @param number Целое число
-     * @return Римское число в виде строки
-     */
     private static String convertToRoman(int number) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < ROMAN.length; i++) {
@@ -237,13 +243,7 @@ public class Main {
             String chInput = br.readLine();
             chInput = chInput.replaceAll("\\s+", "");
             chInput = chInput.toUpperCase();
-            StringToExample example = stringTransform(chInput);
-            ReadyToCalculate dataForCalculate = stringToInt(example);
-            int value1 = dataForCalculate.value1;
-            int value2 = dataForCalculate.value2;
-            char action = example.action;
-            String numSet = dataForCalculate.numSet;
-            String result = calc(value1, value2, action, numSet);
+            String result = calc(chInput);
             System.out.println("Результат: " + result);
         } catch (IllegalArgumentException e) {
             System.out.println("Ошибка: " + e.getMessage());
